@@ -44,7 +44,6 @@ int main(int argc, char *argv[])
     tam = definir_tamanho(TAMANHO, num_threads, n);
     printf("\nNovo tamanho: %d\n",tam);
 
-    double t_fim[num_threads];
     t_inicio = omp_get_wtime();
     
     #pragma omp parallel for num_threads(num_threads) reduction(+:total) schedule(dynamic, tam)
