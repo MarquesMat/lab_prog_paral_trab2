@@ -4,15 +4,10 @@
 #include <omp.h>
 
 // Retorna 1 se n for primo e 0 se não for
-int primo(long int n) {
-    if (n <= 1) return 0; // 0 e 1 não são primos
-    if (n <= 3) return 1; // 2 e 3 são primos
-    if (n % 2 == 0 || n % 3 == 0) return 0; // Múltiplos de 2 ou 3 não são primos
-
-    for (long int i = 5; i * i <= n; i += 6) {
-        if (n % i == 0 || n % (i + 2) == 0) return 0;
-    }
-    return 1;
+int primo (long int n) {
+       for (long int i = 3; i < (long int)(sqrt(n) + 1); i+=2) 
+        if (n%i == 0) return 0;
+        return 1;
 }
 
 // Retorna o tempo marcado pela thread que terminou por último
