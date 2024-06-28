@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <math.h>
 #include <omp.h>
+#define TAMANHO 500000
+
 
 // Retorna 1 se n for primo e 0 se não for
 int primo(long int n) {
@@ -15,53 +17,81 @@ int primo(long int n) {
     return 1;
 }
 
-// Retorna o tempo marcado pela thread que terminou por último
-double maior_tempo_final(int num_threads, double tempos[]) {
-    double maior = tempos[0];
-    for (int i = 1; i < num_threads; i++) {
-        if (tempos[i] > maior) maior = tempos[i];
-    }
-    return maior;
-}
-
-int main(int argc, char *argv[]) {
-    long int n, total = 0;
+int main(int argc, char *argv[])
+{
+    double t_inicial, t_final;
+    int total = 0;
+    int n;
     int num_threads;
-    double t_inicio;
+    int tam = TAMANHO;
 
-    if (argc < 3) {
-        printf("Argumento faltando! Entre com valores inteiros para N e número de threads, respectivamente.\n");
+    /* Verifica o número de argumentos passados */
+    if (argc < 2)
+    {
+        printf("Entre com o valor do maior inteiro como parâmetro para o programa.\n");
         return 0;
-    } else {
-        n = strtol(argv[1], (char **) NULL, 10);
-        num_threads = strtol(argv[2], (char **) NULL, 10);
+    }
+    else
+    {
+        n = strtol(argv[1], (char **)NULL, 10);
     }
 
+    /* Define o número de threads */
+    num_threads = omp_get_max_threads();
 
-    double t_fim[num_threads];
-    t_inicio = omp_get_wtime();
+       while (tam * num_threads >= n)
+    {
+        tam -= 50000;
+        
+    }
+    if (tam == 0 ) tam = 1;
 
-    #pragma omp parallel num_threads(num_threads) reduction(+:total)
+    /* Registra o tempo inicial de execução do programa */
+    t_inicial = omp_get_wtime();
+
+    /* Inicia a região paralela */
+    #pragma omp parallel num_threads(num_threads) shared(total, n)
     {
         int tid = omp_get_thread_num();
+        int inicio, fim;
 
-         
-        //threads pegam tarefas da bag
-        #pragma omp for if (tid != 0)
-        for (long int i = 3; i <= n; i += 2) { // Só verifica números ímpares
-            if (primo(i) == 1) total++;
-        }
-        t_fim[tid] = omp_get_wtime();
-    
-    }
+        /* Thread mestre (main) carrega a bag de tarefas */
+        #pragma omp single
+        {
+            inicio = 3;
+            while (inicio <= n)
+            {
+                #pragma omp task firstprivate(inicio) firstprivate(fim) if (tid != 0)
+                {
+                    int local_count = 0;
+                    fim = inicio + tam-1;
+                    if (fim > n) fim = n;
+                    if (fim<inicio) fim = inicio;
 
-    // Acrescenta o número 2, que não foi verificado pelo loop
-    if (n >= 2) total++;
+                    for (int i = inicio; i <= fim; i += 2)
+                    {
+                        
+                        if (primo(i))
+                            local_count++;
+                        
+                    }
 
-    double t_total = maior_tempo_final(num_threads, t_fim) - t_inicio;
+                    #pragma omp atomic
+                    total += local_count;
+                }
+                inicio += tam;
+            }
+        } // Fim da região single
 
-    printf("Quantidade de primos entre 1 e %ld: %ld \n", n, total);    
-    printf("Tempo total de execução: %3.10f segundos\n\n", t_total);
+    } // Fim da região paralela
+
+    /* Registra o tempo final de execução */
+    t_final = omp_get_wtime();
+
+    /* Imprime o resultado */
+    total += 1; // Adiciona o número 2, que é primo
+    printf("Quantidade de primos entre 1 e %d: %d\n", n, total);
+    printf("Tempo de execução: %1.3f segundos\n", t_final - t_inicial);
 
     return 0;
 }
