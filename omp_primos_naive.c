@@ -5,9 +5,8 @@
 
 // Retorna 1 se n for primo e 0 se não for
 int primo (long int n) {
-       for (long int i = 3; i < (long int)(sqrt(n) + 1); i+=2) 
-        if (n%i == 0) return 0;
-        return 1;
+    for (long int i = 3; i < (long int)(sqrt(n) + 1); i+=2) if (n%i == 0) return 0;
+    return 1;
 }
 
 // Retorna o tempo marcado pela thread que terminou por último
@@ -50,7 +49,7 @@ int main(int argc, char *argv[]) {
     }
 
     // Acrescenta o número 2, que não foi verificado pelo loop
-    if (n >= 2) total++;
+   total++;
 
     double t_total = maior_tempo_final(num_threads, t_fim) - t_inicio;
 
