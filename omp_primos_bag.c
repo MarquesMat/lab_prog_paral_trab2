@@ -37,34 +37,26 @@ int main(int argc, char *argv[]) {
         num_threads = strtol(argv[2], (char **) NULL, 10);
     }
 
-    // Define o número de threads
-    omp_set_num_threads(num_threads);
 
     double t_fim[num_threads];
     t_inicio = omp_get_wtime();
 
-    #pragma omp parallel reduction(+:total)
+    #pragma omp parallel num_threads(num_threads) reduction(+:total)
     {
         int tid = omp_get_thread_num();
 
-        if (tid == 0) {
-            // Thread 0 aguarda
-            #pragma omp barrier
-        } else {
-            // Outras threads pegam tarefas do "saco"
-            #pragma omp for schedule(dynamic)
-            for (long int i = 3; i <= n; i += 2) { // Só verifica números ímpares
-                if (primo(i) == 1) total++;
-            }
-            t_fim[tid] = omp_get_wtime();
+         
+        //threads pegam tarefas da bag
+        #pragma omp for if (tid != 0)
+        for (long int i = 3; i <= n; i += 2) { // Só verifica números ímpares
+            if (primo(i) == 1) total++;
         }
+        t_fim[tid] = omp_get_wtime();
+    
     }
 
     // Acrescenta o número 2, que não foi verificado pelo loop
     if (n >= 2) total++;
-
-    // Aguarda todas as threads terminarem antes de calcular o tempo total
-    #pragma omp barrier
 
     double t_total = maior_tempo_final(num_threads, t_fim) - t_inicio;
 
