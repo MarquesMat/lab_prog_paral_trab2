@@ -1,0 +1,12 @@
+Sequencial 10^6
+Quant. de primos entre 1 e n: 78498 
+Tempo de execucao 0.056Quant. de primos entre 1 e n: 78498 
+Tempo de execucao 0.055Quant. de primos entre 1 e n: 78498 
+Tempo de execucao 0.055
+
+10^7
+
+Quant. de primos entre 1 e n: 664579 
+Tempo de execucao 1.399Quant. de primos entre 1 e n: 664579 
+Tempo de execucao 1.406Quant. de primos entre 1 e n: 664579 
+Tempo de execucao 1.400
