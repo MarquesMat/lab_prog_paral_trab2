@@ -20,15 +20,6 @@ int primo (long int n) {
     return 1;
 }
 
-// Retorna o tempo marcado pela thread que terminou por último
-double maior_tempo_final(int num_threads, double tempos[]) {
-    double maior = tempos[0];
-    for (int i = 1; i < num_threads; i++) {
-        if (tempos[i] > maior) maior = tempos[i];
-    }
-    return maior;
-}
-
 // Ajusta o tamanho de trabalho para evitar deadlock
 int definir_tamanho(int t, int num_threads, long int n) {
     if (t * (num_threads - 1) >= n) return definir_tamanho(t-(TAMANHO/10), num_threads, n); // Reduz em 10% do valor original a cada iteração
@@ -37,7 +28,7 @@ int definir_tamanho(int t, int num_threads, long int n) {
 
 int main(int argc, char *argv[])
 {
-    double t_inicio;
+    double t_inicio, t_final;
     long int n, total = 0;
     int num_threads;
     int tam = TAMANHO;
@@ -56,43 +47,19 @@ int main(int argc, char *argv[])
     double t_fim[num_threads];
     t_inicio = omp_get_wtime();
     
-    /* Inicia a região paralela */
-    #pragma omp parallel num_threads(num_threads) shared(total, n, tam, t_fim)
-    {
-        /* Thread mestre (main) carrega a bag de tarefas */
-        #pragma omp single nowait // Não sei como funciona isso
-        {
-            printf("ID da master: %d\n",omp_get_thread_num());
-            int inicio = 3;
-            while (inicio <= n)
-            {
-                #pragma omp task firstprivate(inicio) 
-                {
-                    //printf("Thread %d: inicio %d\n",omp_get_thread_num(),inicio); // Mostra os valores de início dados a cada thread
-                    int local_count = 0;
-                    int fim = inicio + tam - 1;
-                    if (fim < inicio) fim = inicio;
-                    for (int i = inicio; i <= fim && i < n; i += 2) {
-                        if (primo(i)) local_count++;
-                    }
-                    t_fim[omp_get_thread_num()] = omp_get_wtime(); // Cada thread atualiza o tempo que encerrou
-                    #pragma omp atomic
-                    total += local_count;
-                }
-                inicio += tam;
-            }
-        } // Fim da região single
+    #pragma omp parallel for num_threads(num_threads) reduction(+:total) schedule(dynamic, tam)
+		for (int i = 3; i <= n; i+=2) {
+			if(primo(i) == 1) total++;
+		}
 
-        //t_fim[tid] = omp_get_wtime(); // parece q tá pegando só o tempo da master, mas não conferi
-    } // Fim da região paralela
+    t_final = omp_get_wtime();
+
 
     // Acrescenta o número 2, que não foi verificado pelo loop
     total++;
 
-    //double t_total = maior_tempo_final(num_threads, t_fim);
-    //for (int i = 0; i<num_threads; i++) printf("Thread %d: %3.10f\n",i,t_fim[i]);
     printf("Quantidade de primos entre 1 e %ld: %ld \n", n, total);    
-    printf("Tempo total de execução: %3.10f segundos\n\n", maior_tempo_final(num_threads, t_fim) - t_inicio);
+    printf("Tempo total de execução: %3.10f segundos\n\n", t_final - t_inicio);
 
     return 0;
 }
