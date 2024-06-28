@@ -1,0 +1,227 @@
+INÍCIO DO PROGRAMA:  14:23:26
+
+Resultados para omp_primos_bag.c
+
+Rodando os programas com N = 1000000
+--- RODADA 1 ---
+
+Rodando os programas com 8 processos
+
+Quantidade de primos entre 1 e 1000000: 78498 
+Tempo total de execução: 0.0183097520 segundos
+
+
+Rodando os programas com 4 processos
+
+Quantidade de primos entre 1 e 1000000: 78498 
+Tempo total de execução: 0.0274086720 segundos
+
+
+Rodando os programas com 2 processos
+
+Quantidade de primos entre 1 e 1000000: 78498 
+Tempo total de execução: 0.0483222100 segundos
+
+--- RODADA 2 ---
+
+Rodando os programas com 8 processos
+
+Quantidade de primos entre 1 e 1000000: 78498 
+Tempo total de execução: 0.0182382630 segundos
+
+
+Rodando os programas com 4 processos
+
+Quantidade de primos entre 1 e 1000000: 78498 
+Tempo total de execução: 0.0245690480 segundos
+
+
+Rodando os programas com 2 processos
+
+Quantidade de primos entre 1 e 1000000: 78498 
+Tempo total de execução: 0.0484485600 segundos
+
+--- RODADA 3 ---
+
+Rodando os programas com 8 processos
+
+Quantidade de primos entre 1 e 1000000: 78498 
+Tempo total de execução: 0.0182875730 segundos
+
+
+Rodando os programas com 4 processos
+
+Quantidade de primos entre 1 e 1000000: 78498 
+Tempo total de execução: 0.0246507730 segundos
+
+
+Rodando os programas com 2 processos
+
+Quantidade de primos entre 1 e 1000000: 78498 
+Tempo total de execução: 0.0485970530 segundos
+
+Rodando os programas com N = 10000000
+--- RODADA 1 ---
+
+Rodando os programas com 8 processos
+
+Quantidade de primos entre 1 e 10000000: 664579 
+Tempo total de execução: 0.4567101600 segundos
+
+
+Rodando os programas com 4 processos
+
+Quantidade de primos entre 1 e 10000000: 664579 
+Tempo total de execução: 0.6904746410 segundos
+
+
+Rodando os programas com 2 processos
+
+Quantidade de primos entre 1 e 10000000: 664579 
+Tempo total de execução: 1.2067845740 segundos
+
+--- RODADA 2 ---
+
+Rodando os programas com 8 processos
+
+Quantidade de primos entre 1 e 10000000: 664579 
+Tempo total de execução: 0.4384633540 segundos
+
+
+Rodando os programas com 4 processos
+
+Quantidade de primos entre 1 e 10000000: 664579 
+Tempo total de execução: 0.6068945050 segundos
+
+
+Rodando os programas com 2 processos
+
+Quantidade de primos entre 1 e 10000000: 664579 
+Tempo total de execução: 1.2077893260 segundos
+
+--- RODADA 3 ---
+
+Rodando os programas com 8 processos
+
+Quantidade de primos entre 1 e 10000000: 664579 
+Tempo total de execução: 0.4589255040 segundos
+
+
+Rodando os programas com 4 processos
+
+Quantidade de primos entre 1 e 10000000: 664579 
+Tempo total de execução: 0.6059288640 segundos
+
+
+Rodando os programas com 2 processos
+
+Quantidade de primos entre 1 e 10000000: 664579 
+Tempo total de execução: 1.2068494160 segundos
+
+Rodando os programas com N = 100000000
+--- RODADA 1 ---
+
+Rodando os programas com 8 processos
+
+Quantidade de primos entre 1 e 100000000: 5761455 
+Tempo total de execução: 11.8841666590 segundos
+
+
+Rodando os programas com 4 processos
+
+Quantidade de primos entre 1 e 100000000: 5761455 
+Tempo total de execução: 22.2321201760 segundos
+
+
+Rodando os programas com 2 processos
+
+Quantidade de primos entre 1 e 100000000: 5761455 
+Tempo total de execução: 31.9434333590 segundos
+
+--- RODADA 2 ---
+
+Rodando os programas com 8 processos
+
+Quantidade de primos entre 1 e 100000000: 5761455 
+Tempo total de execução: 11.2396070940 segundos
+
+
+Rodando os programas com 4 processos
+
+Quantidade de primos entre 1 e 100000000: 5761455 
+Tempo total de execução: 16.1596205130 segundos
+
+
+Rodando os programas com 2 processos
+
+Quantidade de primos entre 1 e 100000000: 5761455 
+Tempo total de execução: 31.7765217100 segundos
+
+--- RODADA 3 ---
+
+Rodando os programas com 8 processos
+
+Quantidade de primos entre 1 e 100000000: 5761455 
+Tempo total de execução: 11.5851909760 segundos
+
+
+Rodando os programas com 4 processos
+
+Quantidade de primos entre 1 e 100000000: 5761455 
+Tempo total de execução: 22.8402876190 segundos
+
+
+Rodando os programas com 2 processos
+
+Quantidade de primos entre 1 e 100000000: 5761455 
+Tempo total de execução: 31.8058020680 segundos
+
+Rodando os programas com N = 1000000000
+--- RODADA 1 ---
+
+Rodando os programas com 8 processos
+
+Quantidade de primos entre 1 e 1000000000: 50847534 
+Tempo total de execução: 300.0047597290 segundos
+
+
+Rodando os programas com 4 processos
+
+Quantidade de primos entre 1 e 1000000000: 50847534 
+Tempo total de execução: 491.4328034870 segundos
+
+
+Rodando os programas com 2 processos
+
+Quantidade de primos entre 1 e 1000000000: 50847534 
+Tempo total de execução: 884.4146356350 segundos
+
+--- RODADA 2 ---
+
+Rodando os programas com 8 processos
+
+Quantidade de primos entre 1 e 1000000000: 50847534 
+Tempo total de execução: 304.8140140270 segundos
+
+
+Rodando os programas com 4 processos
+
+Quantidade de primos entre 1 e 1000000000: 50847534 
+Tempo total de execução: 486.9105430470 segundos
+
+
+Rodando os programas com 2 processos
+
+Quantidade de primos entre 1 e 1000000000: 50847534 
+Tempo total de execução: 867.6683875270 segundos
+
+--- RODADA 3 ---
+
+Rodando os programas com 8 processos
+
+Quantidade de primos entre 1 e 1000000000: 50847534 
+Tempo total de execução: 300.1722661950 segundos
+
+
+Rodando os programas com 4 processos
+
