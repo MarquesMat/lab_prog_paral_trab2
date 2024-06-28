@@ -59,8 +59,6 @@ int main(int argc, char *argv[])
     /* Inicia a região paralela */
     #pragma omp parallel num_threads(num_threads) shared(total, n, tam, t_fim)
     {
-        //int tid = omp_get_thread_num(); // Essa variável não está sendo usada, pois a função get foi chamada abaixo
-
         /* Thread mestre (main) carrega a bag de tarefas */
         #pragma omp single nowait // Não sei como funciona isso
         {
@@ -75,9 +73,9 @@ int main(int argc, char *argv[])
                     int fim = inicio + tam - 1;
                     if (fim < inicio) fim = inicio;
                     for (int i = inicio; i <= fim && i < n; i += 2) {
-                        if (primo(i)) local_count++; // O ideal seria usar a cláusula reduction e acessar diretamento o total
+                        if (primo(i)) local_count++;
                     }
-                    t_fim[omp_get_thread_num()] = omp_get_wtime();
+                    t_fim[omp_get_thread_num()] = omp_get_wtime(); // Cada thread atualiza o tempo que encerrou
                     #pragma omp atomic
                     total += local_count;
                 }
@@ -92,7 +90,7 @@ int main(int argc, char *argv[])
     total++;
 
     //double t_total = maior_tempo_final(num_threads, t_fim);
-    for (int i = 0; i<num_threads; i++) printf("Thread %d: %3.10f\n",i,t_fim[i]);
+    //for (int i = 0; i<num_threads; i++) printf("Thread %d: %3.10f\n",i,t_fim[i]);
     printf("Quantidade de primos entre 1 e %ld: %ld \n", n, total);    
     printf("Tempo total de execução: %3.10f segundos\n\n", maior_tempo_final(num_threads, t_fim) - t_inicio);
 
